@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Copyright (c) 2022 Caen De Silva - All Rights Reserved -->
+	<style>
+		@media screen and (prefers-color-scheme: dark) {
+			html, body {
+				background-color: #292d3e;
+			}
+		}
+		@media screen and (min-width: 1000px) {
+			body {
+				font-size: .8rem;
+			}
+		}
+	</style>
+</head>
+<body class="p-8">
+	<section style="max-width: 1200px;">
+    <table style="background-color: #1e212e; padding: 1rem; width: 100%;">
+        <thead style="background-color: #1e212e; color: white; font-family: sans-serif;">
+        <tr>
+            <th style="text-align: left;">
+                HTML Rich Data Explorer <sup style="text-align: center; font-weight: 800; box-sizing: border-box; border-width: 0; border-style: solid; border-color: #e5e7eb; border-radius: 0.5rem; background-color: rgb(74 222 128); padding-left: 0.325rem; padding-right: 0.325rem; padding-top: 0.175rem; padding-bottom: 0.175rem; font-size: 0.625rem; line-height: 1.25rem; color: rgb(255 255 255);">Beta</sup>
+            </th>
+            <td style="text-align: right;">
+                <noscript>
+                    This feature requires JavaScript.
+                    Here are the <a href="https://www.enable-javascript.com/">
+                    instructions how to enable JavaScript in your web browser</a>.
+                </noscript>
+                <form style="float: right; width: fit-content;" onchange="switchTab(event)">
+                    <fieldset>
+                        <legend>
+                            Select view
+                        </legend>
+                        <!-- Radio selectors to pick which tab to use -->
+                        <label for="tab-full">
+                            <input type="radio" name="tab" id="tab-full" value="full" checked>
+                            Full HTML
+                        </label>
+                        <label for="tab-markup">
+                            <input type="radio" name="tab" id="tab-markup" value="markup">
+                            Markup
+                        </label>
+                        <label for="tab-schema">
+                            <input type="radio" name="tab" id="tab-schema" value="schema">
+                            Microdata
+                        </label>
+                        <label for="tab-a11y">
+                            <input type="radio" name="tab" id="tab-a11y" value="a11y">
+                            Accessibility
+                        </label>
+                    </fieldset>
+                </form>
+            </td>
+        </tr>
+    </thead>
+    </table>
+
+
+	<style>
+		.partoffull {
+			color: lightgray;
+		}
+		.partofmarkup {
+			color: lightgreen;
+		}
+		.partofschema {
+			color: pink;
+		}
+		.partofa11y {
+			color: lightblue;
+		}
+
+		.partofschema, .partofa11y, .partofmarkup, .partoffull {
+			opacity: 0;
+			font-size: 0;
+			transition: all 0.5s ease-in;
+		}
+		.showschema .partofschema, .showa11y  .partofa11y, .showmarkup .partofmarkup, .showfull .partoffull {
+			opacity: 1;
+			font-size: 1rem;
+		}
+		@media screen and (min-width: 1000px) {
+		.showschema .partofschema, .showa11y  .partofa11y, .showmarkup .partofmarkup, .showfull .partoffull {
+				font-size: .8rem;
+			}
+		}
+		.showfull .hideonfull {
+			opacity: 0;
+			font-size: 0;
+		}
+	 	.showa11y .partofschema, .showoffull .partofschema, .showofmarkup .partofschema {
+			opacity: 0;
+			font-size: 0;
+		}
+		.showschema:not(.showfull) .hideonschema {
+			opacity: 0;
+			font-size: 0;
+		}
+		
+		/* Disable animations if user has prefers reduced motion enabled */
+		@media (prefers-reduced-motion: reduce) {
+			.partoffull, .partofmarkup, .partofschema, .partofa11y {
+				transition: none;
+			}
+		}
+	</style>
+
+    <table id="codetable" style="background-color: #292d3e; padding: 1rem; width: 100%;" class="">
+		<tbody style='font-family: "Fira Code", Consolas, monospace; white-space: normal; color: whitesmoke;'>
+			<tr>
+				<td style="padding-left: 0ch;">
+					<span style="color: #5fb3b3;">&lt;</span>article<span class="formerpartofschema partoffull"> id="https://hydephp.github.io/posts/alice-in-wonderland" itemscope itemtype="https://schema.org/Article"</span><span class="partofschema"> ['@type' => 'Article', '@id' => 'https://hydephp.github.io/posts/alice-in-wonderland']</span><span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr class="partoffull">
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;</span>meta itemprop="url" content="https://hydephp.github.io/posts/alice-in-wonderland.html"<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr class="partofschema">
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;</span>meta ['url' => 'https://hydephp.github.io/posts/alice-in-wonderland.html']<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr class="partoffull">
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;</span>meta itemprop="identifier" content="alice-in-wonderland"<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr class="partofschema">
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;</span>meta ['identifier' => 'alice-in-wonderland']<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;</span>header<span class="partofa11y"> role="doc-pageheader"</span><span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 4ch;">
+					<span style="color: #5fb3b3;">&lt;</span>h1<span class="partoffull"> itemprop="headline"</span><span class="partofschema"> ['headline' => 'Alice\'s Adventures in Wonderland']</span><span style="color: #5fb3b3;">&gt;</span><span class="hideonschema">Alice's Adventures in Wonderland<span style="color: #5fb3b3;">&lt;/</span>h1<span style="color: #5fb3b3;">&gt;</span></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 4ch;">
+					<span style="color: #5fb3b3;">&lt;</span>div<span class="partoffull"> id="byline"</span><span class="partofa11y"> aria-label="About the post" role="doc-introduction"</span><span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 6ch;">
+					Posted <span style="color: #5fb3b3;">&lt;</span>time<span class="partoffull"> itemprop="datePublished" datetime="1865-11-18 18:52 GMT"</span><span class="partofa11y"> title="Saturday Nov 18th, 1865, at 6:52pm"</span><span class="partofschema"> ['datePublished' => '1865-11-18T18:52:00+00:00']</span><span style="color: #5fb3b3;">&gt;</span><span class="partofmarkup partofa11y">Nov 18th, 1865</span><span class="hideonschema"><span style="color: #5fb3b3;">&lt;/</span>time<span style="color: #5fb3b3;">&gt;</span></span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 6ch;">
+					by author
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 6ch;">
+					<span style="color: #5fb3b3;">&lt;</span>address<span class="partoffull"> itemprop="author" itemscope itemtype="https://schema.org/Person"</span><span class="partofschema"> ['property' => 'author', '@type' => 'Person']</span><span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr class="partoffull">
+				<td style="padding-left: 8ch;">
+					<!--<span style="color: #5fb3b3;">&lt;</span>!-- The Author username and URI is loaded from the Authors.yml file --<span style="color: #5fb3b3;">&gt;</span>-->
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 8ch;">
+					<span style="color: #5fb3b3;">&lt;</span>a<span class="partoffull"> href="https://en.wikipedia.org/wiki/Lewis_Carroll"</span><span class="partofa11y"> rel="author"</span><span class="formerpartofschema partoffull"> itemprop="url"</span><span class="partofschema"> ['author.url' => 'https://en.wikipedia.org/wiki/Lewis_Carroll']</span><span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 10ch;">
+					<span style="color: #5fb3b3;">&lt;</span>span<span class="formerpartofschema partoffull"> itemprop="name"</span><span class="partoffull"> title="@<abbr title="Username fetched from Authors.yml">lewis_carroll</abbr>"</span><span class="partofschema"> ['author.name' => 'Lewis Carroll']</span><span style="color: #5fb3b3;">&gt;</span>Lewis Carroll<span style="color: #5fb3b3;">&lt;/</span>span<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 8ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>a<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 6ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>address<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 6ch;">
+					in the category "novels"
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 4ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>div<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>header<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;</span>div<span class="partoffull"> itemprop="articleBody"</span><span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 4ch;">
+					<span style="color: #5fb3b3;">&lt;</span>p<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 6ch;">
+					<div style="max-width: 800px;">
+						<span class="partofschema"> ['articleBody' => '</span><span>Alice was beginning to get very tired of sitting by her sister on the bank, and of having nothing to do:
+							once or twice she had peeped into the book her sister was reading, but it had no pictures or
+							conversations in it, "and what is the use of a book," thought Alice, "without pictures?"</span><span class="partofschema">']</span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 4ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>p<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 2ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>div<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+			<tr>
+				<td style="padding-left: 0ch;">
+					<span style="color: #5fb3b3;">&lt;/</span>article<span style="color: #5fb3b3;">&gt;</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</section>
+
+</body>
+
+<script>
+    {
+		const table = document.getElementById('codetable');
+
+		function switchToFull() {
+			table.classList.add('showfull');
+			table.classList.add('showmarkup');
+			table.classList.add('showschema');
+			table.classList.add('showa11y');
+		}
+
+		function switchTab(event) {
+		    let target = event.target.value;
+
+			if (target === 'full') {
+				switchToFull();
+				return;
+			}
+
+			table.classList.remove('showfull');
+			table.classList.remove('showmarkup');
+			table.classList.remove('showschema');
+			table.classList.remove('showa11y');
+
+		    table.classList.add('show' + target);
+		}
+
+		switchToFull();
+    }
+</script>
+</html>
